@@ -142,28 +142,34 @@ function findMexicanFood(allDishes) {
 // <<<<<<<<<<<<<<<<< MAP & FILTER FUNCTIONS <<<<<<<<<<<<<<<<<
 
 function findItalianFood(allDishes) {
-    alert("Searching for Italian dishes...")
-    // TODO #2: Filter all dishes for those that have a cuisine type of Italian
-    alert("Found all Italian dishes!  Check the console for full output")
+    alert("Searching for Italian dishes...");
+    let results = allDishes.filter(function (el) {
+        return el.cuisine === "Italian";
+    });
+    alert("Found all Italian dishes!  Check the console for full output");
+    return results;
 }
 
 function searchCuisines(allDishes) {
-    alert("Searching for dishes by cuisine...")
-    // TODO #3: Gather user input for a cuisine to search for, then filter for all dishes matching this cuisine type
-    alert("Found all dishes matching the cuisine search term!  Check the console for full output")
-}
+    let searchTerm = customPrompt("Please enter a cuisine type to search for:", allDishes.map(dish => dish.cuisine));
+    let results = allDishes.filter(el => el.cuisine === searchTerm);
+    alert("Found all dishes matching the cuisine search term! Check the console for full output");
+    return results;
 
-function searchIngredients(allDishes) {
-    alert("Searching for dishes by ingredient...")
-    // TODO #4: Gather user input for an ingredient to search for, then filter for all dishes that INCLUDE this ingredient in their ingredients array property
-    alert("Found all dishes that contain the ingredient search term!  Check the console for full output")
-}
+    function searchIngredients(allDishes) {
+        let searchTerm = customPrompt("Please enter an ingredient to search for:", []);
+        let results = allDishes.filter(dish => dish.ingredients.includes(searchTerm));
+        alert("Found all dishes that contain the ingredient search term! Check the console for full output");
+        return results;
+    }
+    
 
 function generateCuisineDishName(allDishes) {
-    alert("Combining cuisine and dish names...")
-    // TODO #5: Apply the concatenatorFunction to each dish in allDishes, then log to the console the modified result
-    alert("Successfully combined cuisine and dish names!  Check the console for full output.")
+    let results = allDishes.map(dish => `${dish.cuisine} ${dish.name}`);
+    alert("Successfully combined cuisine and dish names! Check the console for full output.");
+    return results;
 }
+
 
 // <<<<<<<<<<<<<<<<< EMAIL AND TEXT MARKETING MESSAGES <<<<<<<<<<<<<<<<<
 
@@ -210,11 +216,11 @@ function textMessage(dishOfTheDay) {
 }
 
 function generateMarketingMessage(dishOfTheDay, messageTypeCallback) {
-    alert('Sending final message to all 389 customers...')
-    // TODO #7: Call the passed-in callback function on the dishOfTheDay.  Save the result as a variable
-    // Then, log that result to the console
-    alert('Success!  Check the console for a copy of the final marketing message!')
+    let message = messageTypeCallback(dishOfTheDay);
+    alert('Success! Check the console for a copy of the final marketing message!');
+    return message;
 }
+
 
 // <<<<<<<<<<<<<<<<< CUSTOM PROMPT FUNCTION <<<<<<<<<<<<<<<<<
 
